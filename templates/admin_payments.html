@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Admin Payments</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_payments.css') }}">
+
+</head>
+
+<body>
+
+
+<div class="admin-layout">
+
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            🍴 BITE
+        </div>
+
+        <p class="admin-label">
+            ADMIN PANEL
+        </p>
+
+
+        <a href="/admin-dashboard">
+            📊 Dashboard
+        </a>
+
+        <a href="/admin-restaurants">
+            🏨 Restaurants
+        </a>
+
+        <a href="/admin-foods">
+            🍔 Food Items
+        </a>
+
+        <a href="/admin-customers">
+            👥 Customers
+        </a>
+
+        <a href="/admin-orders">
+            📦 Orders
+        </a>
+
+        <a href="/admin-payments" class="active">
+            💳 Payments
+        </a>
+
+        <a href="/admin-logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+    <main class="admin-content">
+
+
+        <div class="page-header">
+
+            <p>
+                PAYMENT MANAGEMENT
+            </p>
+
+            <h1>
+                Customer Payments 💳
+            </h1>
+
+            <span>
+                View payment details for all customer orders.
+            </span>
+
+        </div>
+        <div class="payments-card">
+
+            {% if payments %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Order ID
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Restaurant
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Payment Method
+                            </th>
+
+                            <th>
+                                Payment Status
+                            </th>
+
+                            <th>
+                                Order Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for payment in payments %}
+
+                        <tr>
+
+
+                            <td>
+
+                                <strong>
+                                    #{{ payment.order_id }}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="customer">
+
+                                    <strong>
+                                        {{ payment.customer_name }}
+                                    </strong>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                🏨 {{ payment.restaurant_name }}
+
+                            </td>
+
+                            <td>
+
+                                <strong class="amount">
+                                    ₹{{ payment.total_amount }}
+                                </strong>
+
+                            </td>
+
+                            <td>
+
+                                {% if payment.payment_method == "COD" %}
+
+                                    <span class="payment cod">
+                                        💵 Cash on Delivery
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="payment online">
+                                        💳 Online Payment
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% if payment.payment_status == "Paid" %}
+
+                                    <span class="status paid">
+                                        ✓ Paid
+                                    </span>
+
+                                {% elif payment.payment_method == "COD" %}
+
+                                    <span class="status pending">
+                                        ⏳ Cash on Delivery
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status pending">
+                                        ⏳ {{ payment.payment_status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% if payment.order_status == "Order Placed" %}
+
+                                    <span class="order-status placed">
+                                        Order Placed
+                                    </span>
+
+                                {% elif payment.order_status == "Preparing" %}
+
+                                    <span class="order-status preparing">
+                                        Preparing
+                                    </span>
+
+                                {% elif payment.order_status == "Out for Delivery" %}
+
+                                    <span class="order-status delivery">
+                                        Out for Delivery
+                                    </span>
+
+                                {% elif payment.order_status == "Delivered" %}
+
+                                    <span class="order-status delivered">
+                                        Delivered
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="order-status">
+                                        {{ payment.order_status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <small>
+                                    {{ payment.order_date }}
+                                </small>
+
+                            </td>
+
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+            <div class="empty-payments">
+
+                <div>
+                    💳
+                </div>
+
+                <h2>
+                    No Payments Yet
+                </h2>
+
+                <p>
+                    Payment information will appear here
+                    once customers place orders.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Restaurant - BITE</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/add_restaurant.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <a href="/admin-restaurants" class="back">
+        ← Back to Restaurants
+    </a>
+
+    <div class="form-card">
+
+        <div class="icon">
+            🏨
+        </div>
+
+        <h1>
+            Add Restaurant
+        </h1>
+
+        <p>
+            Add a new restaurant to BITE.
+        </p>
+
+
+        <form method="POST">
+
+            <label>
+                Restaurant Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Example: Spice Garden"
+                required>
+
+
+            <label>
+                Location
+            </label>
+
+            <input
+                type="text"
+                name="location"
+                placeholder="Example: Chennai"
+                required>
+
+
+            <label>
+                Rating
+            </label>
+
+            <input
+                type="number"
+                name="rating"
+                min="1"
+                max="5"
+                step="0.1"
+                placeholder="4.5"
+                required>
+
+
+            <label>
+                Delivery Time
+            </label>
+
+            <input
+                type="text"
+                name="delivery_time"
+                placeholder="25-30 mins"
+                required>
+
+
+            <button type="submit">
+                Add Restaurant
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

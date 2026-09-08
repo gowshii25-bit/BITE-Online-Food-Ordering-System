@@ -1,0 +1,385 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+
+    background: #f6f4f8;
+
+    color: #29202f;
+}
+
+.admin-layout {
+    display: flex;
+
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+
+    background: #47205f;
+
+    padding: 30px 18px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.admin-logo {
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    padding: 0 12px;
+
+    margin-bottom: 35px;
+}
+
+
+.admin-label {
+    color: #bdaecc;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    margin: 0 12px 15px;
+}
+
+
+.sidebar a {
+    color: #ddd;
+
+    text-decoration: none;
+
+    padding: 13px 12px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+}
+
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #5d3475;
+
+    color: white;
+}
+
+
+.sidebar a:last-child {
+    margin-top: auto;
+}
+
+.admin-content {
+    flex: 1;
+
+    padding: 40px;
+}
+
+.page-header p {
+    color: #e76f51;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+}
+
+
+.page-header h1 {
+    color: #47205f;
+
+    font-size: 28px;
+
+    margin-top: 6px;
+}
+
+
+.page-header span {
+    color: #888;
+
+    font-size: 12px;
+
+    display: block;
+
+    margin-top: 8px;
+}
+.orders-card {
+    background: white;
+
+    margin-top: 30px;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.04);
+}
+
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 950px;
+}
+
+
+thead {
+    background: #f8f3fa;
+}
+
+
+th {
+    color: #47205f;
+
+    font-size: 11px;
+
+    text-align: left;
+
+    padding: 16px;
+
+    white-space: nowrap;
+}
+
+
+td {
+    padding: 16px;
+
+    border-top: 1px solid #eee;
+
+    font-size: 12px;
+
+    color: #555;
+
+    vertical-align: middle;
+}
+
+
+tbody tr:hover {
+    background: #fcf9fd;
+}
+
+.customer {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.customer strong {
+    color: #29202f;
+
+    font-size: 12px;
+}
+
+
+.customer small {
+    color: #999;
+
+    font-size: 10px;
+}
+
+
+.amount {
+    color: #47205f;
+
+    font-size: 13px;
+}
+
+.payment {
+    padding: 6px 9px;
+
+    border-radius: 15px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.payment.cod {
+    background: #fff2df;
+
+    color: #b56a00;
+}
+
+
+.payment.online {
+    background: #e8f5ff;
+
+    color: #2374a6;
+}
+
+.status {
+    display: inline-block;
+
+    padding: 6px 10px;
+
+    border-radius: 15px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.status.placed {
+    background: #eee5f5;
+
+    color: #47205f;
+}
+
+
+.status.preparing {
+    background: #fff2df;
+
+    color: #b56a00;
+}
+
+
+.status.delivery {
+    background: #e7f3ff;
+
+    color: #2473a6;
+}
+
+
+.status.delivered {
+    background: #e6f7e9;
+
+    color: #2d8a46;
+}
+
+.address-row td {
+    background: #fffaf5;
+
+    color: #777;
+
+    font-size: 11px;
+
+    padding-top: 10px;
+
+    padding-bottom: 12px;
+}
+
+
+.address-row strong {
+    color: #47205f;
+}
+
+.empty-orders {
+    text-align: center;
+
+    padding: 70px 30px;
+}
+
+
+.empty-orders div {
+    font-size: 50px;
+}
+
+
+.empty-orders h2 {
+    color: #47205f;
+
+    margin-top: 15px;
+}
+
+
+.empty-orders p {
+    color: #888;
+
+    font-size: 12px;
+
+    margin-top: 8px;
+}
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .admin-content {
+        padding: 25px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .admin-content {
+        padding: 20px;
+    }
+
+}
+
+.status-form {
+    margin: 0;
+}
+
+
+.status-form select {
+    border: none;
+
+    background: #f7edf8;
+
+    color: #47205f;
+
+    padding: 8px 10px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+.status-form select:hover {
+    background: #eee5f5;
+}
+
+
+.status-form select:focus {
+    box-shadow: 0 0 0 2px rgba(71, 32, 95, 0.12);
+}

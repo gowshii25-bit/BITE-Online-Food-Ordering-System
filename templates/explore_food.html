@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Explore Food - BITE</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/explore_food.css') }}">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <nav>
+
+        <a href="/customer-home">
+            Home
+        </a>
+
+        <a href="/explore-food" class="active">
+            Explore Food
+        </a>
+
+        <a href="/my-orders">
+            My Orders
+        </a>
+
+    </nav>
+
+    <div class="nav-right">
+
+        <span>
+            Hi, {{ session.get("user_name", "Customer") }} 👋
+        </span>
+
+        <a href="/logout" class="logout">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+<section class="page-header">
+
+    <p>
+        EXPLORE
+    </p>
+
+    <h1>
+        Find something delicious 🍴
+    </h1>
+
+    <span>
+        Explore food from restaurants near you.
+    </span>
+
+</section>
+
+<section class="categories">
+
+    <a href="/search?q=Pizza" class="category-card">
+        <div>🍕</div>
+        <h3>Pizza</h3>
+    </a>
+
+    <a href="/search?q=Burger" class="category-card">
+        <div>🍔</div>
+        <h3>Burgers</h3>
+    </a>
+
+    <a href="/search?q=Biryani" class="category-card">
+        <div>🍚</div>
+        <h3>Biryani</h3>
+    </a>
+
+    <a href="/search?q=Noodles" class="category-card">
+        <div>🍜</div>
+        <h3>Noodles</h3>
+    </a>
+
+    <a href="/search?q=Dessert" class="category-card">
+        <div>🍰</div>
+        <h3>Desserts</h3>
+    </a>
+
+    <a href="/search?q=Drinks" class="category-card">
+        <div>🥤</div>
+        <h3>Drinks</h3>
+    </a>
+
+</section>
+
+<section class="food-section">
+
+    <div class="section-title">
+
+        <p>
+            AVAILABLE NOW
+        </p>
+
+        <h2>
+            Popular Food
+        </h2>
+
+    </div>
+
+
+    {% if foods %}
+
+        <div class="food-grid">
+
+            {% for food in foods %}
+
+            <div class="food-card">
+
+
+                <!-- FOOD ICON -->
+
+                <div class="food-image">
+
+                    {% if food.category == "Biryani" %}
+                        🍚
+                    {% elif food.category == "Pizza" %}
+                        🍕
+                    {% elif food.category == "Burger" %}
+                        🍔
+                    {% elif food.category == "Noodles" %}
+                        🍜
+                    {% elif food.category == "Dessert" %}
+                        🍰
+                    {% elif food.category == "Drinks" %}
+                        🥤
+                    {% else %}
+                        🍴
+                    {% endif %}
+
+                </div>
+
+
+                <div class="food-info">
+
+                    <span class="category">
+                        {{ food.category }}
+                    </span>
+
+                    <h2>
+                        {{ food.food_name }}
+                    </h2>
+
+                    <p class="restaurant">
+                        🏨 {{ food.restaurant_name }}
+                    </p>
+
+                    <p class="location">
+                        📍 {{ food.location }}
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>
+                            ₹{{ food.price }}
+                        </strong>
+
+                        <span class="rating">
+                            ⭐ {{ food.rating }}
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('food_details', food_id=food.food_id) }}"
+                        class="choose-btn">
+
+                        View Food →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <div class="empty">
+
+            <div>
+                🍴
+            </div>
+
+            <h2>
+                No food available
+            </h2>
+
+            <p>
+                There are currently no available food items.
+            </p>
+
+            <a href="/customer-home">
+                Back to Home
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</body>
+</html>

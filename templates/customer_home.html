@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Customer Home</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+
+<nav>
+
+    <a href="/customer-home">
+        Home
+    </a>
+
+   <a href="/explore-food">
+    Explore Food
+</a>
+
+    <a href="/my-orders">
+        My Orders
+    </a>
+
+</nav>
+
+
+    <div class="nav-buttons">
+
+        <span>
+            Hi, {{ user_name }} 👋
+        </span>
+
+        <a href="/logout" class="admin-btn">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+
+        <div class="hero-tag">
+            👋 WELCOME BACK
+        </div>
+
+
+        <h1>
+
+            What are you<br>
+
+            <span>
+                craving today?
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Search for the food you want and compare
+            restaurants before placing your order.
+
+        </p>
+
+        <form
+            action="/search"
+            method="GET"
+            class="search-box">
+
+
+            <!-- LOCATION -->
+
+            <span class="location-icon">
+                📍
+            </span>
+
+
+            <select
+                name="location"
+                class="location-select"
+                required>
+
+                <option value="">
+                    Location
+                </option>
+
+                <option value="Coimbatore">
+                    Coimbatore
+                </option>
+
+                <option value="Chennai">
+                    Chennai
+                </option>
+
+                <option value="Madurai">
+                    Madurai
+                </option>
+
+                <option value="Bangalore">
+                    Bangalore
+                </option>
+
+            </select>
+
+            <span class="search-icon">
+                🔍
+            </span>
+
+
+            <input
+                type="text"
+                name="q"
+                placeholder="Search for food..."
+                required>
+
+
+            <button type="submit">
+                Search
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <div class="food-circle">
+            🍔
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<section class="categories">
+
+
+    <div class="section-title">
+
+        <span>
+            EXPLORE
+        </span>
+
+        <h2>
+            Choose what you want
+        </h2>
+
+    </div>
+
+
+    <div class="category-grid">
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍕
+            </div>
+
+            <h3>
+                Pizza
+            </h3>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍔
+            </div>
+
+            <h3>
+                Burgers
+            </h3>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍚
+            </div>
+
+            <h3>
+                Biryani
+            </h3>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍜
+            </div>
+
+            <h3>
+                Noodles
+            </h3>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍰
+            </div>
+
+            <h3>
+                Desserts
+            </h3>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🥤
+            </div>
+
+            <h3>
+                Drinks
+            </h3>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+</body>
+
+</html>

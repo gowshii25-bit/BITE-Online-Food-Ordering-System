@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            🍴 BITE
+        </div>
+
+        <p class="admin-label">
+            ADMIN PANEL
+        </p>
+
+
+        <a href="/admin-dashboard" class="active">
+            📊 Dashboard
+        </a>
+
+
+        <a href="/admin-restaurants">
+            🏨 Restaurants
+        </a>
+
+        <a href="/admin-foods">
+    🍔 Food Items
+</a>
+
+
+        <a href="/admin-customers">
+            👥 Customers
+        </a>
+
+        <a href="{{ url_for('admin_orders') }}">
+    📦 Orders
+</a>
+
+        <a href="/admin-payments">
+            💳 Payments
+        </a>
+
+
+        <a href="/admin-logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <main class="admin-content">
+
+
+        <div class="admin-header">
+
+            <div>
+
+                <p>
+                    ADMIN DASHBOARD
+                </p>
+
+                <h1>
+                    Welcome, Admin 👋
+                </h1>
+
+            </div>
+
+        </div>
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <span>
+                    🏨
+                </span>
+
+                <p>
+                    Restaurants
+                </p>
+
+                <h2>
+                    {{ restaurant_count }}
+                </h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span>
+                    🍔
+                </span>
+
+                <p>
+                    Food Items
+                </p>
+
+                <h2>
+                    {{ food_count }}
+                </h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span>
+                    👥
+                </span>
+
+                <p>
+                    Customers
+                </p>
+
+                <h2>
+                    {{ customer_count }}
+                </h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span>
+                    📦
+                </span>
+
+                <p>
+                    Orders
+                </p>
+
+                <h2>
+                    {{ order_count }}
+                </h2>
+
+            </div>
+
+
+        </div>
+
+        <div class="welcome-card">
+
+            <h2>
+                BITE Management System
+            </h2>
+
+            <p>
+                Use the sidebar to manage restaurants,
+                food items, customers and orders.
+            </p>
+
+        </div>
+
+        <div class="quick-section">
+
+            <h2>
+                Quick Actions
+            </h2>
+
+
+            <div class="quick-grid">
+
+                <a href="/admin-restaurants"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        🏨
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Manage Restaurants
+                        </h3>
+
+                        <p>
+                            Add and manage restaurants
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+                <a href="/admin-foods"
+   class="quick-card">
+
+                    <div class="quick-icon">
+                        🍔
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Manage Food
+                        </h3>
+
+                        <p>
+                            Add and manage food items
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+                <a href="/admin-orders"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            View Orders
+                        </h3>
+
+                        <p>
+                            View customer orders
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <a href="/admin-customers"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Customers
+                        </h3>
+
+                        <p>
+                            View registered customers
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/auth.css') }}">
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-left">
+
+        <div class="brand">
+            🍴 BITE
+        </div>
+
+        <h1>
+            Welcome<br>
+            back!
+        </h1>
+
+        <p>
+            Login to discover your favourite food
+            and order from the restaurant you choose.
+        </p>
+
+    </div>
+
+
+    <div class="auth-card">
+
+        <a href="/" class="back">
+            ← Back to Home
+        </a>
+
+        <h2>Welcome Back</h2>
+
+        <p class="subtitle">
+            Login to your BITE account
+        </p>
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% for category, message in messages %}
+
+                <div class="message {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endwith %}
+
+
+        <form method="POST">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required>
+
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                required>
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="bottom-text">
+
+            Don't have an account?
+
+            <a href="/register">
+                Register
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f6f9;
+}
+
+.sidebar {
+    position: fixed;
+    width: 240px;
+    height: 100vh;
+    background: #47205f;
+    padding: 28px 18px;
+}
+
+.logo {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 0 15px 30px;
+}
+
+.admin-label {
+    color: #cbb9d5;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 0 15px;
+    margin-bottom: 12px;
+}
+
+.sidebar a {
+    display: block;
+    color: #d9cde0;
+    text-decoration: none;
+    padding: 13px 15px;
+    border-radius: 7px;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #603679;
+    color: white;
+}
+
+.sidebar-bottom {
+    margin-top: 30px;
+    border-top: 1px solid #68447a;
+    padding-top: 15px;
+}
+
+.main {
+    margin-left: 240px;
+    padding: 35px 45px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topbar p {
+    color: #e76f51;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.topbar h1 {
+    color: #47205f;
+    font-size: 28px;
+    margin-top: 5px;
+}
+
+.add-btn {
+    background: #e76f51;
+    color: white;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.message {
+    background: #e6f7e9;
+    color: #28753b;
+    padding: 12px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    font-size: 11px;
+}
+
+.restaurant-table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee5ee;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f7edf8;
+    color: #47205f;
+    font-size: 10px;
+    text-align: left;
+    padding: 16px;
+}
+
+td {
+    padding: 17px 16px;
+    border-top: 1px solid #eee;
+    color: #777;
+    font-size: 11px;
+}
+
+td strong {
+    color: #47205f;
+}
+
+.rating {
+    background: #fff3d2;
+    color: #8a6510;
+    padding: 6px 9px;
+    border-radius: 12px;
+    font-size: 10px;
+}
+
+.empty {
+    text-align: center;
+    padding: 50px;
+    color: #999;
+}
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 25px;
+    }
+
+    .restaurant-table {
+        overflow-x: auto;
+    }
+}

@@ -1,0 +1,346 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    background: #f6f4f8;
+
+    color: #29202f;
+}
+
+.admin-layout {
+    display: flex;
+
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+
+    min-height: 100vh;
+
+    background: #47205f;
+
+    padding: 30px 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex-shrink: 0;
+}
+
+.admin-logo {
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    padding: 0 12px;
+
+    margin-bottom: 35px;
+}
+
+.admin-label {
+    color: #bdaecc;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    margin: 0 12px 15px;
+}
+
+.sidebar a {
+    color: #ddd;
+
+    text-decoration: none;
+
+    padding: 13px 12px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+
+    transition: 0.2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #5d3475;
+
+    color: white;
+}
+
+.sidebar a:last-child {
+    margin-top: auto;
+}
+
+.admin-content {
+    flex: 1;
+
+    padding: 40px;
+
+    min-width: 0;
+}
+
+.admin-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.admin-header p {
+    color: #e76f51;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+}
+
+.admin-header h1 {
+    color: #47205f;
+
+    margin-top: 5px;
+
+    font-size: 28px;
+}
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-top: 35px;
+}
+
+.stat-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.04);
+
+    border: 1px solid #eee9f0;
+
+    transition: 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.stat-card span {
+    font-size: 25px;
+}
+
+.stat-card p {
+    color: #888;
+
+    font-size: 11px;
+
+    margin-top: 15px;
+}
+
+.stat-card h2 {
+    color: #47205f;
+
+    margin-top: 5px;
+
+    font-size: 25px;
+}
+
+.welcome-card {
+    background: white;
+
+    margin-top: 25px;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    border: 1px solid #eee9f0;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.03);
+}
+
+.welcome-card h2 {
+    color: #47205f;
+
+    font-size: 20px;
+}
+
+.welcome-card p {
+    color: #888;
+
+    font-size: 12px;
+
+    margin-top: 8px;
+}
+
+.quick-section {
+    margin-top: 30px;
+}
+
+.quick-section > h2 {
+    color: #47205f;
+
+    font-size: 20px;
+
+    margin-bottom: 15px;
+}
+
+.quick-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.quick-card {
+    background: white;
+
+    border: 1px solid #eee9f0;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.quick-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.07);
+
+    border-color: #d9c6e0;
+}
+
+.quick-icon {
+    width: 48px;
+
+    height: 48px;
+
+    background: #f7edf8;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+    flex-shrink: 0;
+}
+
+.quick-card div:nth-child(2) {
+    flex: 1;
+}
+
+.quick-card h3 {
+    color: #47205f;
+
+    font-size: 13px;
+}
+
+.quick-card p {
+    color: #999;
+
+    font-size: 10px;
+
+    margin-top: 5px;
+}
+
+.quick-card .arrow {
+    color: #e76f51;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+
+    .stats-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .admin-content {
+        padding: 30px;
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .admin-content {
+        padding: 25px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

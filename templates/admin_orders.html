@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Admin Orders</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_orders.css') }}">
+
+</head>
+
+<body>
+
+
+<div class="admin-layout">
+
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            🍴 BITE
+        </div>
+
+        <p class="admin-label">
+            ADMIN PANEL
+        </p>
+
+
+        <a href="/admin-dashboard">
+            📊 Dashboard
+        </a>
+
+        <a href="/admin-restaurants">
+            🏨 Restaurants
+        </a>
+
+        <a href="/admin-foods">
+            🍔 Food Items
+        </a>
+
+        <a href="/admin-customers">
+            👥 Customers
+        </a>
+
+        <a href="/admin-orders" class="active">
+            📦 Orders
+        </a>
+
+        <a href="/admin-payments">
+            💳 Payments
+        </a>
+
+        <a href="/admin-logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <main class="admin-content">
+
+
+        <div class="page-header">
+
+            <p>
+                ORDER MANAGEMENT
+            </p>
+
+            <h1>
+                Customer Orders 📦
+            </h1>
+
+            <span>
+                View and manage all orders placed by customers.
+            </span>
+
+        </div>
+
+        <div class="orders-card">
+
+            {% if orders %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Order ID
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Restaurant
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Payment
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for order in orders %}
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    #{{ order.order_id }}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="customer">
+
+                                    <strong>
+                                        {{ order.customer_name }}
+                                    </strong>
+
+                                    <small>
+                                        {{ order.customer_email }}
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                🏨 {{ order.restaurant_name }}
+
+                            </td>
+
+                            <td>
+
+                                <strong class="amount">
+                                    ₹{{ order.total_amount }}
+                                </strong>
+
+                            </td>
+
+                            <td>
+
+                                {% if order.payment_method == "COD" %}
+
+                                    <span class="payment cod">
+                                        💵 COD
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="payment online">
+                                        💳 Online
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <form
+                                    action="{{ url_for('admin_update_order', order_id=order.order_id) }}"
+                                    method="POST"
+                                    class="status-form">
+
+                                    <select
+                                        name="order_status"
+                                        onchange="this.form.submit()">
+
+                                        <option
+                                            value="Order Placed"
+                                            {% if order.order_status == "Order Placed" %}selected{% endif %}>
+                                            Order Placed
+                                        </option>
+
+                                        <option
+                                            value="Preparing"
+                                            {% if order.order_status == "Preparing" %}selected{% endif %}>
+                                            Preparing
+                                        </option>
+
+                                        <option
+                                            value="Out for Delivery"
+                                            {% if order.order_status == "Out for Delivery" %}selected{% endif %}>
+                                            Out for Delivery
+                                        </option>
+
+                                        <option
+                                            value="Delivered"
+                                            {% if order.order_status == "Delivered" %}selected{% endif %}>
+                                            Delivered
+                                        </option>
+
+                                    </select>
+
+                                </form>
+
+                            </td>
+
+                            <td>
+
+                                <small>
+                                    {{ order.order_date }}
+                                </small>
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="address-row">
+
+                            <td colspan="7">
+
+                                📍
+
+                                <strong>
+                                    Delivery Address:
+                                </strong>
+
+                                {{ order.delivery_address }}
+
+                            </td>
+
+                        </tr>
+
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+            <div class="empty-orders">
+
+                <div>
+                    📦
+                </div>
+
+                <h2>
+                    No Orders Yet
+                </h2>
+
+                <p>
+                    Customer orders will appear here once they place an order.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+</body>
+</html>

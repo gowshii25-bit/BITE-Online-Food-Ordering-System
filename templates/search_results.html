@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Search Results</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/search.css') }}">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <nav>
+
+        <a href="/customer-home">
+            Home
+        </a>
+
+        <a href="#">
+            Explore Food
+        </a>
+
+        <a href="#">
+            My Orders
+        </a>
+
+    </nav>
+
+    <div class="nav-right">
+
+        <span>
+            🔔
+        </span>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+<section class="search-header">
+
+    <a href="/customer-home" class="back">
+        ← Back
+    </a>
+
+    <p>
+        SEARCH RESULTS
+    </p>
+
+    <h1>
+    Restaurants serving
+    <span>"{{ search_query }}"</span>
+</h1>
+
+{% if location %}
+
+    <div class="selected-location">
+        📍 Showing restaurants in {{ location }}
+    </div>
+
+{% endif %}
+
+    <div class="small-search">
+
+        <form action="/search" method="GET">
+
+            <input
+                type="text"
+                name="q"
+                value="{{ search_query }}"
+                placeholder="Search food...">
+
+            <button>
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<section class="results-section">
+
+    {% if results %}
+
+        <div class="result-top">
+
+            <p>
+                {{ results|length }} restaurant(s) found
+            </p>
+
+            <select>
+
+                <option>
+                    Sort by Rating
+                </option>
+
+                <option>
+                    Price: Low to High
+                </option>
+
+                <option>
+                    Price: High to Low
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="restaurant-grid">
+
+            {% for item in results %}
+
+            <div class="restaurant-card">
+
+
+                <div class="food-image">
+
+                    {% if item.category == "Biryani" %}
+                        🍚
+                    {% elif item.category == "Pizza" %}
+                        🍕
+                    {% elif item.category == "Burger" %}
+                        🍔
+                    {% elif item.category == "Noodles" %}
+                        🍜
+                    {% elif item.category == "Dessert" %}
+                        🍰
+                    {% else %}
+                        🍴
+                    {% endif %}
+
+                </div>
+
+
+                <div class="restaurant-info">
+
+                    <div class="restaurant-name">
+
+                        <div>
+
+                            <h2>
+                                {{ item.restaurant_name }}
+                            </h2>
+
+                            <p>
+                                📍 {{ item.location }}
+                            </p>
+
+                        </div>
+
+                        <span class="rating">
+                            ⭐ {{ item.rating }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="food-name">
+
+                        <h3>
+                            {{ item.food_name }}
+                        </h3>
+
+                        <p>
+                            {{ item.description }}
+                        </p>
+
+                    </div>
+
+
+                    <div class="details">
+
+                        <span>
+                            🛵 {{ item.delivery_time }}
+                        </span>
+
+                        <strong>
+                            ₹{{ item.price }}
+                        </strong>
+
+                    </div>
+
+
+                    <a
+    href="{{ url_for('food_details', food_id=item.food_id) }}"
+    class="choose-btn">
+
+    Choose Restaurant →
+
+</a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <div class="no-results">
+
+            <div>
+                🔍
+            </div>
+
+            <h2>
+                No food found
+            </h2>
+
+            <p>
+                We couldn't find "{{ search_query }}".
+                Try searching for something else.
+            </p>
+
+            <a href="/customer-home">
+                Explore Food
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</body>
+</html>

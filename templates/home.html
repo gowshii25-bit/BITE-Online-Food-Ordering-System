@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Online Food Ordering</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <nav>
+
+        <a href="/" class="active">
+            Home
+        </a>
+
+        <a href="#">
+            Explore Food
+        </a>
+
+        <a href="#">
+            Restaurants
+        </a>
+
+        
+
+    </nav>
+
+
+    <div class="nav-buttons">
+
+        <a href="/login" class="login-btn">
+            Login
+        </a>
+
+        <a href="/register" class="register-btn">
+            Register
+        </a>
+
+        <a href="/admin-login" class="admin-btn">
+            Admin
+        </a>
+
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+
+        <div class="hero-tag">
+            ✨ FOOD YOUR WAY
+        </div>
+
+
+        <h1>
+
+            Find the food<br>
+
+            <span>
+                you love.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Search for your favourite food and discover
+            restaurants offering it. Compare prices,
+            ratings and delivery time before you order.
+
+        </p>
+
+
+
+        <div class="search-box">
+
+
+            <span>
+                📍
+            </span>
+
+
+            <select
+                id="location"
+                name="location">
+
+                <option value="">
+                    Select Location
+                </option>
+
+                <option value="Coimbatore">
+                    Coimbatore
+                </option>
+
+                <option value="Chennai">
+                    Chennai
+                </option>
+
+                <option value="Madurai">
+                    Madurai
+                </option>
+
+                <option value="Bangalore">
+                    Bangalore
+                </option>
+
+            </select>
+
+
+            <span>
+                🔍
+            </span>
+
+
+            <input
+                type="text"
+                id="food"
+                name="food"
+                placeholder="What are you craving today?">
+
+
+            <button
+                type="button"
+                onclick="searchFood()">
+
+                Search
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+
+        <div class="food-circle">
+            🍕
+        </div>
+
+
+        <div class="floating-card rating-card">
+            ⭐ 4.9 Rating
+        </div>
+
+
+        <div class="floating-card delivery-card">
+            🛵 Fast Delivery
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<section class="categories">
+
+
+    <div class="section-title">
+
+        <span>
+            EXPLORE
+        </span>
+
+        <h2>
+            What are you craving?
+        </h2>
+
+        <p>
+            Choose a food category and start exploring.
+        </p>
+
+    </div>
+
+
+
+    <div class="category-grid">
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍕
+            </div>
+
+            <h3>
+                Pizza
+            </h3>
+
+        </div>
+
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍔
+            </div>
+
+            <h3>
+                Burgers
+            </h3>
+
+        </div>
+
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍚
+            </div>
+
+            <h3>
+                Biryani
+            </h3>
+
+        </div>
+
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍜
+            </div>
+
+            <h3>
+                Noodles
+            </h3>
+
+        </div>
+
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🍰
+            </div>
+
+            <h3>
+                Desserts
+            </h3>
+
+        </div>
+
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🥤
+            </div>
+
+            <h3>
+                Drinks
+            </h3>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<section class="why-bite">
+
+
+    <div class="section-title">
+
+        <span>
+            WHY BITE?
+        </span>
+
+        <h2>
+            Food first. Choice matters.
+        </h2>
+
+        <p>
+            We help you find the food you want,
+            then choose the best place to order it from.
+        </p>
+
+    </div>
+
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🔍
+            </div>
+
+            <h3>
+                Search Food First
+            </h3>
+
+            <p>
+                Tell us what you want to eat.
+                We'll find restaurants serving it.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💰
+            </div>
+
+            <h3>
+                Compare Prices
+            </h3>
+
+            <p>
+                See the price of the same food
+                at different restaurants.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⭐
+            </div>
+
+            <h3>
+                Check Ratings
+            </h3>
+
+            <p>
+                Compare restaurant ratings
+                before making your choice.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🛵
+            </div>
+
+            <h3>
+                Easy Ordering
+            </h3>
+
+            <p>
+                Choose, add to cart and
+                order your favourite food.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<footer>
+
+
+    <div class="footer-logo">
+        🍴 BITE
+    </div>
+
+
+    <p>
+        Find the food you love.
+        Choose where you want it from.
+    </p>
+
+
+    <div class="footer-links">
+
+        <a href="#">
+            About
+        </a>
+
+        <a href="#">
+            Contact
+        </a>
+
+        <a href="#">
+            Privacy
+        </a>
+
+        <a href="#">
+            Terms
+        </a>
+
+    </div>
+
+
+    <p class="copyright">
+        © 2026 BITE. All rights reserved.
+    </p>
+
+
+</footer>
+
+
+
+
+<script>
+
+function searchFood() {
+
+    const location =
+        document.getElementById("location").value;
+
+    const food =
+        document.getElementById("food").value.trim();
+
+
+    if (location === "") {
+
+        alert("Please select your location.");
+
+        return;
+    }
+
+
+    if (food === "") {
+
+        alert("Please enter the food you want.");
+
+        return;
+    }
+
+
+    window.location.href =
+        "/search?q="
+        + encodeURIComponent(food)
+        + "&location="
+        + encodeURIComponent(location);
+
+}
+
+</script>
+
+
+</body>
+
+</html>

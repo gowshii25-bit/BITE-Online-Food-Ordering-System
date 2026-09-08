@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Admin Customers</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_customers.css') }}">
+
+</head>
+
+<body>
+
+
+<div class="admin-layout">
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            🍴 BITE
+        </div>
+
+        <p class="admin-label">
+            ADMIN PANEL
+        </p>
+
+
+        <a href="/admin-dashboard">
+            📊 Dashboard
+        </a>
+
+        <a href="/admin-restaurants">
+            🏨 Restaurants
+        </a>
+
+        <a href="/admin-foods">
+            🍔 Food Items
+        </a>
+
+        <a href="/admin-customers" class="active">
+            👥 Customers
+        </a>
+
+        <a href="/admin-orders">
+            📦 Orders
+        </a>
+
+        <a href="/admin-payments">
+            💳 Payments
+        </a>
+
+        <a href="/admin-logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <div class="page-header">
+
+            <p>
+                CUSTOMER MANAGEMENT
+            </p>
+
+            <h1>
+                Registered Customers 👥
+            </h1>
+
+            <span>
+                View all customers registered on BITE.
+            </span>
+
+        </div>
+
+        <div class="customers-card">
+
+
+            {% if customers %}
+
+
+            <div class="customer-count">
+
+                <strong>
+                    {{ customers|length }}
+                </strong>
+
+                <span>
+                    Registered Customer(s)
+                </span>
+
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Address
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for customer in customers %}
+
+                        <tr>
+
+
+                            <td>
+
+                                <strong>
+                                    #{{ customer.id }}
+                                </strong>
+
+                            </td>
+
+                            <td>
+
+                                <div class="customer-info">
+
+                                    <div class="customer-avatar">
+                                        {{ customer.name[0]|upper }}
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            {{ customer.name }}
+                                        </strong>
+
+                                        <small>
+                                            Customer
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                {{ customer.email }}
+
+                            </td>
+
+                            <td>
+
+                                {{ customer.phone }}
+
+                            </td>
+
+                            <td>
+
+                                {% if customer.address %}
+
+                                    📍 {{ customer.address }}
+
+                                {% else %}
+
+                                    <span class="no-address">
+                                        Address not provided
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+            <div class="empty-customers">
+
+                <div class="empty-icon">
+                    👥
+                </div>
+
+                <h2>
+                    No Customers Yet
+                </h2>
+
+                <p>
+                    Registered customers will appear here.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+</body>
+</html>

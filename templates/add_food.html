@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Food - BITE</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/add_food.css') }}">
+
+</head>
+
+<body>
+
+
+<div class="form-container">
+
+
+    <a href="/admin-foods"
+       class="back">
+
+        ← Back to Food Items
+
+    </a>
+
+
+    <div class="form-card">
+
+
+        <div class="icon">
+            🍔
+        </div>
+
+
+        <h1>
+            Add Food Item
+        </h1>
+
+
+        <p>
+            Add a food item and connect it to a restaurant.
+        </p>
+
+
+
+        <form method="POST">
+
+
+            <label>
+                Restaurant
+            </label>
+
+            <select name="restaurant_id"
+                    required>
+
+                <option value="">
+                    Select Restaurant
+                </option>
+
+                {% for restaurant in restaurants %}
+
+                    <option value="{{ restaurant.id }}">
+
+                        {{ restaurant.name }}
+                        -
+                        {{ restaurant.location }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <label>
+                Food Name
+            </label>
+
+            <input
+                type="text"
+                name="food_name"
+                placeholder="Example: Chicken Biryani"
+                required>
+
+            <label>
+                Category
+            </label>
+
+            <input
+                type="text"
+                name="category"
+                placeholder="Example: Biryani"
+                required>
+            <label>
+                Description
+            </label>
+
+            <textarea
+                name="description"
+                placeholder="Describe the food item..."
+                rows="4"></textarea>
+
+            <label>
+                Price
+            </label>
+
+            <input
+                type="number"
+                name="price"
+                step="0.01"
+                min="1"
+                placeholder="180"
+                required>
+
+            <label>
+                Availability
+            </label>
+
+            <select name="availability">
+
+                <option value="Available">
+                    Available
+                </option>
+
+                <option value="Unavailable">
+                    Unavailable
+                </option>
+
+            </select>
+
+
+
+            <button type="submit">
+                Add Food
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

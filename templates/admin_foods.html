@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Food Items</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_foods.css') }}">
+
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <p class="admin-label">
+        ADMIN PANEL
+    </p>
+
+
+    <a href="/admin-dashboard">
+        📊 Dashboard
+    </a>
+
+    <a href="/admin-restaurants">
+        🏨 Restaurants
+    </a>
+
+    <a href="/admin-foods" class="active">
+        🍔 Food Items
+    </a>
+
+    <a href="admin-customers">
+        👥 Customers
+    </a>
+
+    <a href="/admin-orders">
+        📦 Orders
+    </a>
+
+    <a href="/admin-payments">
+        💳 Payments
+    </a>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="/admin-logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+
+    <div class="topbar">
+
+        <div>
+
+            <p>
+                MANAGEMENT
+            </p>
+
+            <h1>
+                Food Items
+            </h1>
+
+        </div>
+
+
+        <a href="/admin-foods/add"
+           class="add-btn">
+
+            + Add Food
+
+        </a>
+
+    </div>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% for category, message in messages %}
+
+            <div class="message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endwith %}
+
+
+    <div class="food-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Food</th>
+
+                    <th>Restaurant</th>
+
+                    <th>Location</th>
+
+                    <th>Category</th>
+
+                    <th>Price</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for food in foods %}
+
+                <tr>
+
+                    <td>
+                        #{{ food.id }}
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            {{ food.food_name }}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+                        {{ food.restaurant_name }}
+                    </td>
+
+
+                    <td>
+                        📍 {{ food.location }}
+                    </td>
+
+
+                    <td>
+
+                        <span class="category">
+                            {{ food.category }}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <strong class="price">
+                            ₹{{ "%.2f"|format(food.price) }}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        {% if food.availability == "Available" %}
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        {% else %}
+
+                            <span class="unavailable">
+                                Unavailable
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="7"
+                        class="empty">
+
+                        No food items added yet.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+</main>
+
+</body>
+
+</html>

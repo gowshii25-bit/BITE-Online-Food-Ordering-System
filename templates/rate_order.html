@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Rate Order - BITE</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8f2;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rating-card {
+            width: 500px;
+            background: white;
+            padding: 45px;
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.08);
+
+            text-align: center;
+        }
+
+        .logo {
+            color: #47205f;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .icon {
+            width: 75px;
+            height: 75px;
+
+            background: #f7edf8;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: auto;
+
+            font-size: 35px;
+        }
+
+        h1 {
+            color: #47205f;
+            font-size: 27px;
+            margin-top: 22px;
+        }
+
+        .restaurant-name {
+            color: #777;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .order-number {
+            color: #999;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .rating-title {
+            color: #47205f;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            direction: rtl;
+        }
+
+        .stars input {
+            display: none;
+        }
+
+        .stars label {
+            font-size: 38px;
+            color: #ddd;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .stars label:hover,
+        .stars label:hover ~ label,
+        .stars input:checked ~ label {
+            color: #f4b400;
+        }
+
+
+        textarea {
+            width: 100%;
+            height: 110px;
+
+            margin-top: 25px;
+
+            padding: 14px;
+
+            border: 1px solid #e2d8e5;
+            border-radius: 10px;
+
+            resize: none;
+
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #6b3b80;
+        }
+
+        textarea::placeholder {
+            color: #aaa;
+        }
+
+
+        .submit-btn {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: #e76f51;
+            color: white;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #d85f43;
+        }
+
+        .back-btn {
+            display: block;
+
+            margin-top: 15px;
+
+            color: #47205f;
+
+            text-decoration: none;
+
+            font-size: 12px;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .rating-card {
+                width: 90%;
+                padding: 30px 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="rating-card">
+
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+
+    <div class="icon">
+        ⭐
+    </div>
+
+
+    <h1>
+        Rate Your Order
+    </h1>
+
+
+    <p class="restaurant-name">
+        🏨 {{ order.restaurant_name }}
+    </p>
+
+
+    <p class="order-number">
+        Order #{{ order.id }}
+    </p>
+
+
+    <form
+        action="{{ url_for('rate_order', order_id=order.id) }}"
+        method="POST">
+
+
+        <p class="rating-title">
+            How was your experience?
+        </p>
+
+
+        <div class="stars">
+
+            <input
+                type="radio"
+                id="star5"
+                name="rating"
+                value="5"
+                required>
+
+            <label for="star5">
+                ★
+            </label>
+
+
+            <input
+                type="radio"
+                id="star4"
+                name="rating"
+                value="4">
+
+            <label for="star4">
+                ★
+            </label>
+
+
+            <input
+                type="radio"
+                id="star3"
+                name="rating"
+                value="3">
+
+            <label for="star3">
+                ★
+            </label>
+
+
+            <input
+                type="radio"
+                id="star2"
+                name="rating"
+                value="2">
+
+            <label for="star2">
+                ★
+            </label>
+
+
+            <input
+                type="radio"
+                id="star1"
+                name="rating"
+                value="1">
+
+            <label for="star1">
+                ★
+            </label>
+
+        </div>
+
+
+        <textarea
+            name="review"
+            placeholder="Tell us about your experience (optional)..."></textarea>
+
+
+        <button
+            type="submit"
+            class="submit-btn">
+
+            ⭐ Submit Rating
+
+        </button>
+
+
+    </form>
+
+
+    <a
+        href="{{ url_for('order_details', order_id=order.id) }}"
+        class="back-btn">
+
+        ← Back to Order
+
+    </a>
+
+
+</div>
+
+
+</body>
+</html>
+

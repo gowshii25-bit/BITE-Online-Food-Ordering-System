@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Checkout</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/checkout.css') }}">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <div class="checkout-step">
+        Checkout
+    </div>
+
+    <a href="/cart">
+        ← Cart
+    </a>
+
+</header>
+
+
+<section class="checkout-container">
+
+
+    <div class="checkout-main">
+
+        <h1>
+            Complete Your Order
+        </h1>
+
+        <p class="subtitle">
+            Almost there! Enter your details to place your order.
+        </p>
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% for category, message in messages %}
+
+                <div class="message {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endwith %}
+
+
+        <form action="/place-order" method="POST">
+
+            <div class="checkout-card">
+
+                <h2>
+                    📍 Delivery Address
+                </h2>
+
+                <p>
+                    Where should we deliver your food?
+                </p>
+
+                <textarea
+                    name="address"
+                    placeholder="Enter your complete delivery address"
+                    required>{{ user["address"] or "" }}</textarea>
+
+            </div>
+
+            <div class="checkout-card">
+
+                <h2>
+                    💳 Payment Method
+                </h2>
+
+                <p>
+                    Choose how you want to pay.
+                </p>
+
+
+                <div class="payment-options">
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="COD"
+                            checked>
+
+                        <div>
+
+                            <strong>
+                                💵 Cash on Delivery
+                            </strong>
+
+                            <span>
+                                Pay when your food arrives.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="ONLINE">
+
+                        <div>
+
+                            <strong>
+                                💳 Online Payment
+                            </strong>
+
+                            <span>
+                                Pay securely online.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="place-order-btn">
+
+                🔒 Place Order
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+    <aside class="order-summary">
+
+        <h2>
+            Your Order
+        </h2>
+
+
+        {% for item in cart_items %}
+
+        <div class="summary-item">
+
+            <div>
+
+                <strong>
+                    {{ item.food_name }}
+                </strong>
+
+                <p>
+                    {{ item.restaurant_name }}
+                </p>
+
+                <span>
+                    ₹{{ item.price }} × {{ item.quantity }}
+                </span>
+
+            </div>
+
+            <strong>
+                ₹{{ item.price * item.quantity }}
+            </strong>
+
+        </div>
+
+        {% endfor %}
+
+
+        <hr>
+
+
+        <div class="summary-row">
+
+            <span>
+                Subtotal
+            </span>
+
+            <strong>
+                ₹{{ subtotal }}
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Delivery
+            </span>
+
+            <strong>
+                ₹{{ delivery_charge }}
+            </strong>
+
+        </div>
+
+
+        <hr>
+
+
+        <div class="total-row">
+
+            <span>
+                Total
+            </span>
+
+            <strong>
+                ₹{{ total }}
+            </strong>
+
+        </div>
+
+
+    </aside>
+
+</section>
+
+
+</body>
+</html>

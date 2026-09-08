@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - My Orders</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/my_orders.css') }}">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <nav>
+
+        <a href="/customer-home">
+            Home
+        </a>
+
+        <a href="/explore-food">
+            Explore Food
+        </a>
+
+        <a href="/my-orders" class="active">
+            My Orders
+        </a>
+
+    </nav>
+
+    <div class="nav-right">
+
+        <a href="/cart">
+            🛒 Cart
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+<section class="page-header">
+
+    <p>
+        ORDER HISTORY
+    </p>
+
+    <h1>
+        My Orders 📦
+    </h1>
+
+    <span>
+        Track your food orders and delivery status.
+    </span>
+
+</section>
+
+<section class="orders-container">
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+            <div class="order-header">
+
+                <div>
+
+                    <span class="order-label">
+                        ORDER
+                    </span>
+
+                    <h2>
+                        #{{ order.id }}
+                    </h2>
+
+                </div>
+<div>
+
+    {% if order.order_status == "Order Placed" %}
+
+        <span class="status placed">
+            🟣 Order Placed
+        </span>
+
+    {% elif order.order_status == "Preparing" %}
+
+        <span class="status preparing">
+            🟠 Preparing
+        </span>
+
+    {% elif order.order_status == "Out for Delivery" %}
+
+        <span class="status delivery">
+            🔵 Out for Delivery
+        </span>
+
+    {% elif order.order_status == "Delivered" %}
+
+        <span class="status delivered">
+            🟢 Delivered
+        </span>
+
+    {% else %}
+
+        <span class="status">
+            {{ order.order_status }}
+        </span>
+
+    {% endif %}
+
+</div>
+
+{% if order.order_status == "Delivered" %}
+
+    <a
+        href="{{ url_for('rate_order', order_id=order.id) }}"
+        class="rate-btn">
+
+        ⭐ Rate This Order
+
+    </a>
+
+{% endif %}
+
+            </div>
+            <div class="restaurant">
+
+                <div class="restaurant-icon">
+                    🏨
+                </div>
+
+                <div>
+
+                    <h3>
+                        {{ order.restaurant_name }}
+                    </h3>
+
+                    <p>
+                        Restaurant
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="order-details">
+
+
+                <div class="detail">
+
+                    <span>
+                        💰 Total
+                    </span>
+
+                    <strong>
+                        ₹{{ order.total_amount }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                        💳 Payment
+                    </span>
+
+                    <strong>
+
+                        {% if order.payment_method == "COD" %}
+                            Cash on Delivery
+                        {% else %}
+                            Online Payment
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                        📅 Order Date
+                    </span>
+
+                    <strong>
+                        {{ order.order_date }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>
+                        📍 Delivery Address
+                    </span>
+
+                    <strong>
+                        {{ order.delivery_address }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="tracking">
+
+                <div class="tracking-title">
+                    Order Tracking
+                </div>
+
+
+                <div class="tracking-line">
+
+                    <div class="track-step
+                        {% if order.order_status in ['Order Placed', 'Preparing', 'Out for Delivery', 'Delivered'] %}
+                            completed
+                        {% endif %}">
+
+                        <div class="track-circle">
+                            ✓
+                        </div>
+
+                        <span>
+                            Order Placed
+                        </span>
+
+                    </div>
+
+
+                    <div class="track-step
+                        {% if order.order_status in ['Preparing', 'Out for Delivery', 'Delivered'] %}
+                            completed
+                        {% endif %}">
+
+                        <div class="track-circle">
+                            ✓
+                        </div>
+
+                        <span>
+                            Preparing
+                        </span>
+
+                    </div>
+
+                    <div class="track-step
+                        {% if order.order_status in ['Out for Delivery', 'Delivered'] %}
+                            completed
+                        {% endif %}">
+
+                        <div class="track-circle">
+                            ✓
+                        </div>
+
+                        <span>
+                            Out for Delivery
+                        </span>
+
+                    </div>
+
+                    <div class="track-step
+                        {% if order.order_status == 'Delivered' %}
+                            completed
+                        {% endif %}">
+
+                        <div class="track-circle">
+                            ✓
+                        </div>
+
+                        <span>
+                            Delivered
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="order-actions">
+
+                <a href="{{ url_for('order_details', order_id=order.id) }}"
+                   class="details-btn">
+
+                    View Order Details →
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <div class="empty-orders">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h2>
+                No Orders Yet
+            </h2>
+
+            <p>
+                You haven't placed any orders yet.
+            </p>
+
+            <a href="/explore-food">
+                Start Ordering
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+</section>
+
+
+</body>
+</html>

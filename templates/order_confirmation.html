@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order Confirmed - BITE</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background: #fff8f2;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .confirmation {
+            background: white;
+
+            width: 500px;
+
+            padding: 50px;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+
+            background: #e6f7e9;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: auto;
+
+            font-size: 40px;
+        }
+
+        h1 {
+            color: #47205f;
+
+            margin-top: 25px;
+
+            font-size: 28px;
+        }
+
+        .message {
+            color: #777;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-top: 10px;
+        }
+
+        .order-number {
+            background: #f7edf8;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-top: 25px;
+
+            color: #47205f;
+
+            font-size: 12px;
+        }
+
+        .order-number strong {
+            font-size: 16px;
+        }
+
+        .details {
+            text-align: left;
+
+            margin-top: 25px;
+
+            padding: 20px;
+
+            background: #fff8f2;
+
+            border-radius: 10px;
+        }
+
+        .details p {
+            color: #777;
+
+            font-size: 11px;
+
+            margin-bottom: 10px;
+        }
+
+        .details strong {
+            color: #47205f;
+        }
+
+        .home-btn {
+            display: block;
+
+            margin-top: 25px;
+
+            background: #e76f51;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .orders-btn {
+            display: block;
+
+            margin-top: 10px;
+
+            color: #47205f;
+
+            text-decoration: none;
+
+            font-size: 11px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="confirmation">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+
+    <h1>
+        Order Confirmed! 🎉
+    </h1>
+
+
+    <p class="message">
+
+        Your food has been successfully ordered.
+        Get ready for something delicious!
+
+    </p>
+
+
+    <div class="order-number">
+
+        Order Number
+
+        <br>
+
+        <strong>
+            #{{ order.id }}
+        </strong>
+
+    </div>
+
+
+    <div class="details">
+
+        <p>
+            🏨 Restaurant:
+
+            <strong>
+                {{ order.restaurant_name }}
+            </strong>
+        </p>
+
+
+        <p>
+            🛵 Expected Delivery:
+
+            <strong>
+                {{ order.delivery_time }}
+            </strong>
+        </p>
+
+
+        <p>
+            💰 Total:
+
+            <strong>
+                ₹{{ order.total_amount }}
+            </strong>
+        </p>
+
+
+        <p>
+            💳 Payment:
+
+            <strong>
+
+                {% if order.payment_method == "COD" %}
+                    Cash on Delivery
+                {% else %}
+                    Online Payment
+                {% endif %}
+
+            </strong>
+        </p>
+
+
+        <p>
+            📦 Status:
+
+            <strong>
+                {{ order.order_status }}
+            </strong>
+        </p>
+
+
+        <p>
+            📍 Delivery:
+
+            <strong>
+                {{ order.delivery_address }}
+            </strong>
+        </p>
+
+    </div>
+
+
+    <a href="/customer-home" class="home-btn">
+        Continue Ordering
+    </a>
+
+
+    <a href="/my-orders" class="orders-btn">
+        View My Orders
+    </a>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Your Cart - BITE</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/cart.css') }}">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <nav>
+
+        <a href="/customer-home">
+            Home
+        </a>
+
+        <a href="/search?q=biryani">
+            Explore Food
+        </a>
+
+    </nav>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</header>
+
+
+<section class="cart-container">
+
+    <a href="/customer-home" class="back">
+        ← Continue Shopping
+    </a>
+
+    <h1>
+        Your Cart 🛒
+    </h1>
+
+
+    {% if cart_items %}
+
+
+        <div class="cart-layout">
+
+
+            <div class="cart-items">
+
+                {% for item in cart_items %}
+
+                <div class="cart-item">
+
+                    <div class="food-icon">
+                        🍴
+                    </div>
+
+                    <div class="item-info">
+
+                        <h2>
+                            {{ item.food_name }}
+                        </h2>
+
+                        <p>
+                            🏨 {{ item.restaurant_name }}
+                        </p>
+
+                        <span>
+                            ₹{{ item.price }} ×
+                            {{ item.quantity }}
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        ₹{{ item.price * item.quantity }}
+                    </strong>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="summary">
+
+                <h2>
+                    Order Summary
+                </h2>
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        ₹{{ total }}
+                    </strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong>
+                        ₹40
+                    </strong>
+
+                </div>
+
+                <hr>
+
+                <div class="total-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ₹{{ total + 40 }}
+                    </strong>
+
+                </div>
+
+
+                <a href="/checkout" class="checkout-btn">
+
+    Proceed to Checkout →
+
+</a>
+
+            </div>
+
+        </div>
+
+
+    {% else %}
+
+        <div class="empty-cart">
+
+            <div>
+                🛒
+            </div>
+
+            <h2>
+                Your cart is empty
+            </h2>
+
+            <p>
+                Looks like you haven't added anything yet.
+            </p>
+
+            <a href="/customer-home">
+                Start Ordering
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</body>
+</html>

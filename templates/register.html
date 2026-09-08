@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Register</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/auth.css') }}">
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-left">
+
+        <div class="brand">
+            🍴 BITE
+        </div>
+
+        <h1>
+            Your food<br>
+            journey starts here.
+        </h1>
+
+        <p>
+            Create your BITE account and discover
+            restaurants serving the food you love.
+        </p>
+
+    </div>
+
+
+    <div class="auth-card">
+
+        <a href="/" class="back">
+            ← Back to Home
+        </a>
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+            Register as a BITE customer
+        </p>
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% for category, message in messages %}
+
+                <div class="message {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endwith %}
+
+
+        <form method="POST">
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required>
+
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required>
+
+
+            <label>Phone</label>
+
+            <input
+                type="text"
+                name="phone"
+                placeholder="Enter phone number"
+                required>
+
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create a password"
+                required>
+
+
+            <label>Address</label>
+
+            <textarea
+                name="address"
+                placeholder="Enter your delivery address"></textarea>
+
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p class="bottom-text">
+
+            Already have an account?
+
+            <a href="/login">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

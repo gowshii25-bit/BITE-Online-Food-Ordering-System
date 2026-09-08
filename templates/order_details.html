@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order #{{ order.id }} - BITE</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/order_details.css') }}">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <nav>
+
+        <a href="/customer-home">
+            Home
+        </a>
+
+        <a href="/my-orders">
+            My Orders
+        </a>
+
+    </nav>
+
+    <div class="nav-right">
+
+        <a href="/cart">
+            🛒 Cart
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+<section class="details-container">
+
+
+    <a href="/my-orders" class="back">
+        ← Back to My Orders
+    </a>
+
+
+    <div class="page-heading">
+
+        <p>
+            ORDER DETAILS
+        </p>
+
+        <h1>
+            Order #{{ order.id }} 📦
+        </h1>
+
+    </div>
+
+
+    <div class="status-card">
+
+        <div>
+
+            <span>
+                ORDER STATUS
+            </span>
+
+            {% if order.order_status == "Order Placed" %}
+
+                <h2 class="placed">
+                    🟣 Order Placed
+                </h2>
+
+            {% elif order.order_status == "Preparing" %}
+
+                <h2 class="preparing">
+                    🟠 Preparing
+                </h2>
+
+            {% elif order.order_status == "Out for Delivery" %}
+
+                <h2 class="delivery">
+                    🔵 Out for Delivery
+                </h2>
+
+            {% elif order.order_status == "Delivered" %}
+
+                <h2 class="delivered">
+                    🟢 Delivered
+                </h2>
+
+            {% else %}
+
+                <h2>
+                    {{ order.order_status }}
+                </h2>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="info-card">
+
+        <h2>
+            🏨 Restaurant
+        </h2>
+
+        <h3>
+            {{ order.restaurant_name }}
+        </h3>
+
+        <p>
+            📍 {{ order.restaurant_location }}
+        </p>
+
+    </div>
+
+
+    <div class="items-card">
+
+        <h2>
+            🍔 Ordered Items
+        </h2>
+
+
+        {% for item in items %}
+
+        <div class="food-item">
+
+
+            <div class="food-icon">
+
+                {% if item.category == "Biryani" %}
+                    🍚
+                {% elif item.category == "Pizza" %}
+                    🍕
+                {% elif item.category == "Burger" %}
+                    🍔
+                {% elif item.category == "Noodles" %}
+                    🍜
+                {% elif item.category == "Dessert" %}
+                    🍰
+                {% else %}
+                    🍴
+                {% endif %}
+
+            </div>
+
+
+            <div class="food-info">
+
+                <h3>
+                    {{ item.food_name }}
+                </h3>
+
+                <p>
+                    ₹{{ item.price }} × {{ item.quantity }}
+                </p>
+
+            </div>
+
+
+            <strong>
+                ₹{{ item.price * item.quantity }}
+            </strong>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>
+            💳 Payment Information
+        </h2>
+
+        <div class="info-row">
+
+            <span>
+                Payment Method
+            </span>
+
+            <strong>
+
+                {% if order.payment_method == "COD" %}
+                    Cash on Delivery
+                {% else %}
+                    Online Payment
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span>
+                Payment Status
+            </span>
+
+            <strong>
+                {{ order.payment_status }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>
+            📍 Delivery Information
+        </h2>
+
+        <p class="address">
+            {{ order.delivery_address }}
+        </p>
+
+    </div>
+
+
+    <div class="total-card">
+
+        <span>
+            Order Total
+        </span>
+
+        <strong>
+            ₹{{ order.total_amount }}
+        </strong>
+
+    </div>
+
+
+</section>
+
+
+</body>
+</html>

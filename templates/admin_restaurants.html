@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BITE - Restaurants</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_restaurants.css') }}">
+
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <p class="admin-label">
+        ADMIN PANEL
+    </p>
+
+    <a href="/admin-dashboard">
+        📊 Dashboard
+    </a>
+
+    <a href="/admin-restaurants" class="active">
+        🏨 Restaurants
+    </a>
+
+    <a href="/admin-foods">
+        🍔 Food Items
+    </a>
+
+   
+    <a href="/admin-customers">
+        👥 Customers
+    </a>
+      <a href="/admin-orders">
+        📦 Orders
+    </a>
+
+    <div class="sidebar-bottom">
+
+        <a href="/admin-logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div>
+
+            <p>
+                MANAGEMENT
+            </p>
+
+            <h1>
+                Restaurants
+            </h1>
+
+        </div>
+
+        <a href="/admin-restaurants/add"
+           class="add-btn">
+
+            + Add Restaurant
+
+        </a>
+
+    </header>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% for category, message in messages %}
+
+            <div class="message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endwith %}
+
+
+    <div class="restaurant-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Restaurant</th>
+
+                    <th>Location</th>
+
+                    <th>Rating</th>
+
+                    <th>Delivery Time</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for restaurant in restaurants %}
+
+                <tr>
+
+                    <td>
+                        #{{ restaurant.id }}
+                    </td>
+
+                    <td>
+
+                        <strong>
+                            {{ restaurant.name }}
+                        </strong>
+
+                    </td>
+
+                    <td>
+                        📍 {{ restaurant.location }}
+                    </td>
+
+                    <td>
+
+                        <span class="rating">
+                            ⭐ {{ restaurant.rating }}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        🛵 {{ restaurant.delivery_time }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="5"
+                        class="empty">
+
+                        No restaurants added yet.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ food.food_name }} - BITE</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/food_details.css') }}">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🍴 BITE
+    </div>
+
+    <nav>
+
+        <a href="/customer-home">
+            Home
+        </a>
+
+        <a href="/search?q={{ food.food_name }}&location={{ food.location }}">
+    Back to Results
+</a>
+
+    </nav>
+
+    <div class="nav-right">
+
+        <a href="#">
+            🛒 Cart
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+<section class="details-container">
+
+    <div class="food-display">
+
+        <div class="food-circle">
+
+            {% if food.category == "Biryani" %}
+                🍚
+            {% elif food.category == "Pizza" %}
+                🍕
+            {% elif food.category == "Burger" %}
+                🍔
+            {% elif food.category == "Noodles" %}
+                🍜
+            {% elif food.category == "Dessert" %}
+                🍰
+            {% else %}
+                🍴
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="food-info">
+
+        <span class="category">
+            {{ food.category }}
+        </span>
+
+        <h1>
+            {{ food.food_name }}
+        </h1>
+
+        <div class="restaurant">
+
+            <h3>
+                🏨 {{ food.restaurant_name }}
+            </h3>
+
+            <span>
+                ⭐ {{ food.rating }}
+            </span>
+
+        </div>
+
+        <p class="location">
+            📍 {{ food.location }}
+        </p>
+
+        <p class="description">
+            {{ food.description }}
+        </p>
+
+
+        <div class="delivery">
+
+            <div>
+                🛵
+                <span>Delivery</span>
+                <strong>{{ food.delivery_time }}</strong>
+            </div>
+
+            <div>
+                ⭐
+                <span>Rating</span>
+                <strong>{{ food.rating }}/5</strong>
+            </div>
+
+        </div>
+
+
+        <div class="price">
+            ₹{{ food.price }}
+        </div>
+
+        <div class="quantity-section">
+
+            <label>
+                Quantity
+            </label>
+
+            <div class="quantity">
+
+                <button
+                    type="button"
+                    onclick="decreaseQuantity()">
+                    −
+                </button>
+
+                <span id="quantity">
+                    1
+                </span>
+
+                <button
+                    type="button"
+                    onclick="increaseQuantity()">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+        <form
+            action="/add-to-cart"
+            method="POST">
+
+            <input
+                type="hidden"
+                name="food_id"
+                value="{{ food.food_id }}">
+
+            <input
+                type="hidden"
+                name="quantity"
+                id="quantityInput"
+                value="1">
+
+            <button
+                type="submit"
+                class="cart-btn">
+
+                🛒 Add to Cart
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<script>
+
+let quantity = 1;
+
+function increaseQuantity() {
+
+    quantity++;
+
+    document.getElementById("quantity").innerText = quantity;
+
+    document.getElementById("quantityInput").value = quantity;
+}
+
+
+function decreaseQuantity() {
+
+    if (quantity > 1) {
+
+        quantity--;
+
+        document.getElementById("quantity").innerText = quantity;
+
+        document.getElementById("quantityInput").value = quantity;
+    }
+}
+
+</script>
+
+
+</body>
+</html>
